@@ -39,7 +39,9 @@ import main.java.memoranda.History;
 import main.java.memoranda.interfaces.*;
 import main.java.memoranda.interfaces.INote;
 import main.java.memoranda.date.CurrentDate;
+import main.java.memoranda.ui.htmleditor.BlockAction;
 import main.java.memoranda.ui.htmleditor.HTMLEditor;
+import main.java.memoranda.ui.htmleditor.InlineAction;
 import main.java.memoranda.util.Configuration;
 import main.java.memoranda.util.Context;
 import main.java.memoranda.util.CurrentStorage;
@@ -173,40 +175,40 @@ public class AppFrame extends JFrame {
             workPanel.dailyItemsPanel.editorPanel.importAction);
 
     JMenu jMenuFormatPStyle = new JMenu();
-    JMenuItem jMenuFormatP = new JMenuItem(editor.new BlockAction(editor.T_P,
+    JMenuItem jMenuFormatP = new JMenuItem(new BlockAction(editor, editor.T_P,
             ""));
-    JMenuItem jMenuFormatH1 = new JMenuItem(editor.new BlockAction(editor.T_H1,
+    JMenuItem jMenuFormatH1 = new JMenuItem(new BlockAction(editor, editor.T_H1,
             ""));
-    JMenuItem jMenuFormatH2 = new JMenuItem(editor.new BlockAction(editor.T_H2,
+    JMenuItem jMenuFormatH2 = new JMenuItem(new BlockAction(editor, editor.T_H2,
             ""));
-    JMenuItem jMenuFormatH3 = new JMenuItem(editor.new BlockAction(editor.T_H3,
+    JMenuItem jMenuFormatH3 = new JMenuItem(new BlockAction(editor, editor.T_H3,
             ""));
-    JMenuItem jMenuFormatH4 = new JMenuItem(editor.new BlockAction(editor.T_H4,
+    JMenuItem jMenuFormatH4 = new JMenuItem(new BlockAction(editor, editor.T_H4,
             ""));
-    JMenuItem jMenuFormatH5 = new JMenuItem(editor.new BlockAction(editor.T_H5,
+    JMenuItem jMenuFormatH5 = new JMenuItem(new BlockAction(editor, editor.T_H5,
             ""));
-    JMenuItem jMenuFormatH6 = new JMenuItem(editor.new BlockAction(editor.T_H6,
+    JMenuItem jMenuFormatH6 = new JMenuItem(new BlockAction(editor, editor.T_H6,
             ""));
-    JMenuItem jMenuFormatPRE = new JMenuItem(editor.new BlockAction(
+    JMenuItem jMenuFormatPRE = new JMenuItem(new BlockAction(editor,
             editor.T_PRE, ""));
-    JMenuItem jMenuFormatBLCQ = new JMenuItem(editor.new BlockAction(
+    JMenuItem jMenuFormatBLCQ = new JMenuItem(new BlockAction(editor,
             editor.T_BLOCKQ, ""));
     JMenu jjMenuFormatChStyle = new JMenu();
-    JMenuItem jMenuFormatChNorm = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChNorm = new JMenuItem(new InlineAction(editor,
             editor.I_NORMAL, ""));
-    JMenuItem jMenuFormatChEM = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChEM = new JMenuItem(new InlineAction(editor,
             editor.I_EM, ""));
-    JMenuItem jMenuFormatChSTRONG = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChSTRONG = new JMenuItem(new InlineAction(editor,
             editor.I_STRONG, ""));
-    JMenuItem jMenuFormatChCODE = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChCODE = new JMenuItem(new InlineAction(editor,
             editor.I_CODE, ""));
-    JMenuItem jMenuFormatChCite = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChCite = new JMenuItem(new InlineAction(editor,
             editor.I_CITE, ""));
-    JMenuItem jMenuFormatChSUP = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChSUP = new JMenuItem(new InlineAction(editor,
             editor.I_SUPERSCRIPT, ""));
-    JMenuItem jMenuFormatChSUB = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChSUB = new JMenuItem(new InlineAction(editor,
             editor.I_SUBSCRIPT, ""));
-    JMenuItem jMenuFormatChCustom = new JMenuItem(editor.new InlineAction(
+    JMenuItem jMenuFormatChCustom = new JMenuItem(new InlineAction(editor,
             editor.I_CUSTOM, ""));
     JMenuItem jMenuFormatChB = new JMenuItem(editor.boldAction);
     JMenuItem jMenuFormatChI = new JMenuItem(editor.italicAction);
