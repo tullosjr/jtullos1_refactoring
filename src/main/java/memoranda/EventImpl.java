@@ -24,13 +24,13 @@ import nu.xom.Element;
 /*$Id: EventImpl.java,v 1.9 2004/10/06 16:00:11 ivanrise Exp $*/
 public class EventImpl implements Event, Comparable {
     
-    private Element _elem = null;
+    private Element _element = null;
 
     /**
      * Constructor for EventImpl.
      */
     public EventImpl(Element elem) {
-        _elem = elem;
+        _element = elem;
     }
 
    
@@ -38,14 +38,14 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getHour()
      */
     public int getHour() {
-        return new Integer(_elem.getAttribute("hour").getValue()).intValue();
+        return new Integer(_element.getAttribute("hour").getValue()).intValue();
     }
 
     /**
      * @see Event#getMinute()
      */
     public int getMinute() {
-        return new Integer(_elem.getAttribute("min").getValue()).intValue();
+        return new Integer(_element.getAttribute("min").getValue()).intValue();
     }
     
     public String getTimeString() {
@@ -57,14 +57,14 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getText()
      */
     public String getText() {
-        return _elem.getValue();
+        return _element.getValue();
     }
 
     /**
      * @see Event#getContent()
      */
     public Element getContent() {
-        return _elem;
+        return _element;
     }
     /**
      * @see Event#isRepeatable()
@@ -76,7 +76,7 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getStartDate()
      */
     public CalendarDate getStartDate() {
-        Attribute a = _elem.getAttribute("startDate");
+        Attribute a = _element.getAttribute("startDate");
         if (a != null) return new CalendarDate(a.getValue());
         return null;
     }
@@ -84,7 +84,7 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getEndDate()
      */
     public CalendarDate getEndDate() {
-        Attribute a = _elem.getAttribute("endDate");
+        Attribute a = _element.getAttribute("endDate");
         if (a != null) return new CalendarDate(a.getValue());
         return null;
     }
@@ -92,7 +92,7 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getPeriod()
      */
     public int getPeriod() {
-        Attribute a = _elem.getAttribute("period");
+        Attribute a = _element.getAttribute("period");
         if (a != null) return new Integer(a.getValue()).intValue();
         return 0;
     }
@@ -100,7 +100,7 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getId()
      */
     public String getId() {
-        Attribute a = _elem.getAttribute("id");
+        Attribute a = _element.getAttribute("id");
         if (a != null) return a.getValue();
         return null;
     }
@@ -108,7 +108,7 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getRepeat()
      */
     public int getRepeat() {
-        Attribute a = _elem.getAttribute("repeat-type");
+        Attribute a = _element.getAttribute("repeat-type");
         if (a != null) return new Integer(a.getValue()).intValue();
         return 0;
     }
@@ -137,7 +137,7 @@ public class EventImpl implements Event, Comparable {
      * @see Event#getWorkinDays()
      */
 	public boolean getWorkingDays() {
-        Attribute a = _elem.getAttribute("workingDays");
+        Attribute a = _element.getAttribute("workingDays");
         if (a != null && a.getValue().equals("true")) return true;
         return false;
 	}
