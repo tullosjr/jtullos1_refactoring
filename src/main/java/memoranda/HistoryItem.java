@@ -9,6 +9,8 @@
 package main.java.memoranda;
 
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.interfaces.Note;
+import main.java.memoranda.interfaces.Project;
 
 /**
  * 

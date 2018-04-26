@@ -1,5 +1,8 @@
 package main.java.memoranda;
 
+import main.java.memoranda.interfaces.Note;
+import main.java.memoranda.interfaces.NoteListener;
+
 import java.util.Collection;
 import java.util.Vector;
 

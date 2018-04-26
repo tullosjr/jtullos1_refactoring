@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import main.java.memoranda.date.CalendarDate;
+import main.java.memoranda.interfaces.Event;
 import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Util;
 import nu.xom.Attribute;

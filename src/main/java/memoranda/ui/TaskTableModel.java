@@ -21,16 +21,15 @@
 package main.java.memoranda.ui;
 
 import javax.swing.event.*;
-import javax.swing.tree.TreePath;
 
 import main.java.memoranda.*;
 import main.java.memoranda.date.CurrentDate;
+import main.java.memoranda.interfaces.Project;
+import main.java.memoranda.interfaces.Task;
 import main.java.memoranda.ui.treetable.AbstractTreeTableModel;
 import main.java.memoranda.ui.treetable.TreeTableModel;
 import main.java.memoranda.util.Context;
 import main.java.memoranda.util.Local;
-
-import java.util.Hashtable;
 
 /**
  * JAVADOC:

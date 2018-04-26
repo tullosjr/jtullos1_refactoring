@@ -7,6 +7,8 @@
  */
 package main.java.memoranda;
 
+import main.java.memoranda.interfaces.Event;
+import main.java.memoranda.interfaces.EventNotificationListener;
 import main.java.memoranda.ui.EventNotificationDialog;
 
 /**
@@ -23,7 +25,7 @@ public class DefaultEventNotifier implements EventNotificationListener {
 	}
 
 	/**
-	 * @see main.java.memoranda.EventNotificationListener#eventIsOccured(main.java.memoranda.Event)
+	 * @see EventNotificationListener#eventIsOccured(Event)
 	 */
 	public void eventIsOccured(Event ev) {		
 		new EventNotificationDialog(
@@ -32,7 +34,7 @@ public class DefaultEventNotifier implements EventNotificationListener {
 			ev.getText());
 	}
 	/**
-	 * @see main.java.memoranda.EventNotificationListener#eventsChanged()
+	 * @see EventNotificationListener#eventsChanged()
 	 */
 	public void eventsChanged() {
 		//

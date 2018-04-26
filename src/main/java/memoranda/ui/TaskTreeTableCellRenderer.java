@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,8 +17,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 
-import main.java.memoranda.Project;
-import main.java.memoranda.Task;
+import main.java.memoranda.interfaces.Project;
+import main.java.memoranda.interfaces.Task;
 import main.java.memoranda.date.CurrentDate;
 
 /**

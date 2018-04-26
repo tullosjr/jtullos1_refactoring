@@ -8,7 +8,6 @@
  */
 package main.java.memoranda.util;
 import java.io.BufferedReader;
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,7 +20,7 @@ import java.util.zip.ZipOutputStream;
 
 import javax.swing.JOptionPane;
 
-import main.java.memoranda.Project;
+import main.java.memoranda.interfaces.Project;
 import main.java.memoranda.ProjectManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.ui.App;

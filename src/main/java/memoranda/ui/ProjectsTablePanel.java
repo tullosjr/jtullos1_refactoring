@@ -13,7 +13,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import main.java.memoranda.CurrentProject;
-import main.java.memoranda.Project;
+import main.java.memoranda.interfaces.Project;
 import main.java.memoranda.ProjectManager;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.util.Local;

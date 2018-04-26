@@ -2,13 +2,11 @@ package main.java.memoranda.ui;
 
 import javax.swing.*;
 import javax.swing.table.*;
-import javax.swing.tree.*;
 
 import main.java.memoranda.*;
 import main.java.memoranda.date.*;
-import main.java.memoranda.util.*;
-
-import javax.swing.event.*;
+import main.java.memoranda.interfaces.Project;
+import main.java.memoranda.interfaces.Task;
 
 import java.awt.*;
 import java.awt.event.*;
