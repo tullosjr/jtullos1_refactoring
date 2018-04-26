@@ -10,5 +10,13 @@
 # Eclipse Core		
 .project
 
+#Intellij
+*.iml
+.idea/
+
+#VIM
+*.swp
+
 # JDT-specific (Eclipse Java Development Tools)		
 .classpath
+/bin/
