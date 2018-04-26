@@ -1,5 +1,5 @@
 /**
- * NoteListImpl.java
+ * INoteListImpl.java
  * Created on 21.02.2003, 15:43:26 Alex
  * Package: net.sf.memoranda
  * 
@@ -12,9 +12,9 @@ import java.util.Vector;
 
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
-import main.java.memoranda.interfaces.Note;
-import main.java.memoranda.interfaces.NoteList;
-import main.java.memoranda.interfaces.Project;
+import main.java.memoranda.interfaces.INote;
+import main.java.memoranda.interfaces.INoteList;
+import main.java.memoranda.interfaces.IProject;
 import main.java.memoranda.util.Util;
 import nu.xom.Attribute;
 import nu.xom.Document;
@@ -23,25 +23,25 @@ import nu.xom.Elements;
 /**
  * 
  */
-/*$Id: NoteListImpl.java,v 1.14 2004/10/28 11:30:15 alexeya Exp $*/
-public class NoteListImpl implements NoteList {
+/*$Id: INoteListImpl.java,v 1.14 2004/10/28 11:30:15 alexeya Exp $*/
+public class INoteListImpl implements INoteList {
 
-    private Project _project = null;
+    private IProject _project = null;
     private Document _doc = null;
     private Element _root = null;
 
 //    public static final String NS_JNNL = "http://www.openmechanics.org/2003/jnotes-noteslist";
 
     /**
-     * Constructor for NoteListImpl.
+     * Constructor for INoteListImpl.
      */
-    public NoteListImpl(Document doc, Project prj) {
+    public INoteListImpl(Document doc, IProject prj) {
         _doc = doc;
         _root = _doc.getRootElement();
         _project = prj;
     }
 
-    public NoteListImpl(Project prj) {
+    public INoteListImpl(IProject prj) {
     	
         //_root = new Element("noteslist", NS_JNNL);
         _root = new Element("noteslist");
@@ -72,7 +72,7 @@ public class NoteListImpl implements NoteList {
     }
     
     /**
-     * @see NoteList#getMarkedNotes()
+     * @see INoteList#getMarkedNotes()
      */
     public Collection getMarkedNotes() {
         Vector v = new Vector();
@@ -88,7 +88,7 @@ public class NoteListImpl implements NoteList {
 					Vector ns = d.getNotes();
 					for(int ni = 0; ni < ns.size(); ni++) {
 						NoteElement ne = (NoteElement) ns.get(ni);
-						Note n = new NoteImpl(ne.getElement(), _project);
+						INote n = new NoteImpl(ne.getElement(), _project);
 						if (n.isMarked()) v.add(n);
                 }
             }
@@ -130,24 +130,24 @@ public class NoteListImpl implements NoteList {
 	/**
 	 * returns the first note for a date.
 	 * @param CalendarDate
-	 * @return Note
+	 * @return INote
 	 */
 	 
-    public Note getNoteForDate(CalendarDate date) {
+    public INote getNoteForDate(CalendarDate date) {
         Day d = getDay(date);
         if (d == null)
             return null;
 		Vector ns = d.getNotes();
 		if(ns.size()>0) {
 			NoteElement n = (NoteElement) ns.get(0);
-			Note currentNote = new NoteImpl(n.getElement(), _project);
-			return currentNote; 
+			INote currentINote = new NoteImpl(n.getElement(), _project);
+			return currentINote;
 		}
 		return null;
         //return new NoteImpl(d.getElement(), _project);
     }
 
-    public Note createNoteForDate(CalendarDate date) {
+    public INote createNoteForDate(CalendarDate date) {
         Year y = getYear(date.getYear());
         if (y == null)
             y = createYear(date.getYear());
@@ -162,7 +162,7 @@ public class NoteListImpl implements NoteList {
     }
     
      /*
-     * @see net.sf.memoranda.NoteList#removeNoteForDate(net.sf.memoranda.date.CalendarDate)
+     * @see net.sf.memoranda.INoteList#removeNoteForDate(net.sf.memoranda.date.CalendarDate)
      */
 /*    public void removeNoteForDate(CalendarDate date) {
         Day d = getDay(date);
@@ -182,7 +182,7 @@ public class NoteListImpl implements NoteList {
 //		CurrentNote.set(null);
     }
 	
-    public Note getActiveNote() {
+    public INote getActiveNote() {
         //return CurrentNote.get(); 
     	return getNoteForDate(CurrentDate.get());
     	// FIXED: Must return the first note for today [alexeya]
@@ -349,7 +349,7 @@ public class NoteListImpl implements NoteList {
             return new Integer(dEl.getAttribute("day").getValue()).intValue();
         }
 
-        /*public Note getNote() {
+        /*public INote getNote() {
             return new NoteImpl(dEl);
         }*/
 		
@@ -414,7 +414,7 @@ public class NoteListImpl implements NoteList {
 	}
 	
     /**
-     * @see NoteList#getXMLContent()
+     * @see INoteList#getXMLContent()
      */
     public Document getXMLContent() {
         return _doc;

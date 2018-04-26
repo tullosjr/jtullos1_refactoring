@@ -10,15 +10,15 @@ package main.java.memoranda;
 
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
-import main.java.memoranda.interfaces.Project;
+import main.java.memoranda.interfaces.IProject;
 import nu.xom.Attribute;
 import nu.xom.Element;
 
 /**
- * Default implementation of Project interface
+ * Default implementation of IProject interface
  */
 /*$Id: ProjectImpl.java,v 1.7 2004/11/22 10:02:37 alexeya Exp $*/
-public class ProjectImpl implements Project {
+public class ProjectImpl implements IProject {
 
     private Element _root = null;
 
@@ -30,14 +30,14 @@ public class ProjectImpl implements Project {
     }
 
     /**
-     * @see Project#getID()
+     * @see IProject#getID()
      */
     public String getID() {
         return _root.getAttribute("id").getValue();
     }
 
     /**
-     * @see Project#getStartDate()
+     * @see IProject#getStartDate()
      */
     public CalendarDate getStartDate() {
         Attribute d = _root.getAttribute("startDate");
@@ -46,7 +46,7 @@ public class ProjectImpl implements Project {
     }
 
     /**
-     * @see Project#setStartDate(net.sf.memoranda.util.CalendarDate)
+     * @see IProject#setStartDate(net.sf.memoranda.util.CalendarDate)
      */
     public void setStartDate(CalendarDate date) {
         if (date != null)
@@ -54,7 +54,7 @@ public class ProjectImpl implements Project {
     }
 
     /**
-     * @see Project#getEndDate()
+     * @see IProject#getEndDate()
      */
     public CalendarDate getEndDate() {
         Attribute d = _root.getAttribute("endDate");
@@ -63,7 +63,7 @@ public class ProjectImpl implements Project {
     }
 
     /**
-     * @see Project#setEndDate(net.sf.memoranda.util.CalendarDate)
+     * @see IProject#setEndDate(net.sf.memoranda.util.CalendarDate)
      */
     public void setEndDate(CalendarDate date) {
         if (date != null)
@@ -73,30 +73,30 @@ public class ProjectImpl implements Project {
     }
 
     /**
-     * @see Project#getStatus()
+     * @see IProject#getStatus()
      */
     public int getStatus() {
         if (isFrozen())
-            return Project.FROZEN;
+            return IProject.FROZEN;
         CalendarDate today = CurrentDate.get();
         CalendarDate prStart = getStartDate();
         CalendarDate prEnd = getEndDate();
         if (prEnd == null) {
             if (today.before(prStart))
-                return Project.SCHEDULED;
+                return IProject.SCHEDULED;
             else
-                return Project.ACTIVE;                
+                return IProject.ACTIVE;
         }    
         if (today.inPeriod(prStart, prEnd))
-            return Project.ACTIVE;
+            return IProject.ACTIVE;
         else if (today.after(prEnd)) {
             //if (getProgress() == 100)
-                return Project.COMPLETED;
+                return IProject.COMPLETED;
             /*else
-                return Project.FAILED;*/
+                return IProject.FAILED;*/
         }
         else
-            return Project.SCHEDULED;
+            return IProject.SCHEDULED;
     }
 
     private boolean isFrozen() {
@@ -109,7 +109,7 @@ public class ProjectImpl implements Project {
         if (v.size() == 0) return 0;
         int p = 0;
         for (Enumeration en = v.elements(); en.hasMoreElements();) {
-          Task t = (Task) en.nextElement();
+          ITask t = (ITask) en.nextElement();
           p += t.getProgress();
         }
         return (p*100)/(v.size()*100);
@@ -117,14 +117,14 @@ public class ProjectImpl implements Project {
   
     
     /**
-     * @see Project#freeze()
+     * @see IProject#freeze()
      */
     public void freeze() {
         _root.addAttribute(new Attribute("frozen", "yes"));
     }
 
     /**
-     * @see Project#unfreeze()
+     * @see IProject#unfreeze()
      */
     public void unfreeze() {
         if (this.isFrozen())
@@ -132,7 +132,7 @@ public class ProjectImpl implements Project {
     }
     
     /**
-     * @see Project#getTitle()
+     * @see IProject#getTitle()
      */
     public String getTitle() {
         Attribute ta = _root.getAttribute("title");
@@ -141,7 +141,7 @@ public class ProjectImpl implements Project {
         return "";
     }
     /**
-     * @see Project#setTitle(java.lang.String)
+     * @see IProject#setTitle(java.lang.String)
      */
     public void setTitle(String title) {
         setAttr("title", title);
@@ -185,19 +185,19 @@ public class ProjectImpl implements Project {
     /**
      * @see net.sf.memoranda.Project#getTaskList()
      */
-    /*public TaskList getTaskList() {
+    /*public ITaskList getTaskList() {
         return CurrentStorage.get().openTaskList(this);
     }*/
     /**
      * @see net.sf.memoranda.Project#getNoteList()
      */
-    /*public NoteList getNoteList() {
+    /*public INoteList getNoteList() {
         return CurrentStorage.get().openNoteList(this);
     }*/
     /**
      * @see net.sf.memoranda.Project#getResourcesList()
      */
-    /*public ResourcesList getResourcesList() {
+    /*public IResourcesList getResourcesList() {
         return CurrentStorage.get().openResourcesList(this);
     }*/
 }

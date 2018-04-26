@@ -1,7 +1,7 @@
 /*
  * TaskProgressLabel.java         
  * -----------------------------------------------------------------------------
- * Project           memoranda
+ * IProject           memoranda
  * Package           net.sf.memoranda.ui
  * Created           Apr 5, 2007 12:51:26 PM by alex
  * Latest revision   $Revision: 1.1 $
@@ -30,7 +30,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JLabel;
 
-import main.java.memoranda.interfaces.Task;
+import main.java.memoranda.interfaces.ITask;
 
 /**
  * <h1>TaskProgressLabel</h1>
@@ -45,12 +45,12 @@ import main.java.memoranda.interfaces.Task;
 class TaskProgressLabel extends JLabel{
     TaskTable table;
     int column;
-    Task task;
+    ITask task;
     public TaskProgressLabel( TaskTable table ){
         this.table = table;
         setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     }
-    public void setTask(Task t){ task = t;}
+    public void setTask(ITask t){ task = t;}
     public void setColumn(int col){ column = col;}
     
     public void paintComponent(Graphics g) {

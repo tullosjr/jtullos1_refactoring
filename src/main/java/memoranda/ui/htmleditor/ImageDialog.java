@@ -58,7 +58,7 @@ public class ImageDialog extends JDialog implements WindowListener {
     JLabel jLabel8 = new JLabel();
     String[] aligns = {"left", "right", "top", "middle", "bottom", "absmiddle",
         "texttop", "baseline"}; 
-    // Note: align values are not localized because they are HTML keywords 
+    // INote: align values are not localized because they are HTML keywords
     public JComboBox alignCB = new JComboBox(aligns);
     JLabel jLabel9 = new JLabel();
     public JTextField urlField = new JTextField();

@@ -1,5 +1,5 @@
 /**
- * Project.java
+ * IProject.java
  * Created on 11.02.2003, 16:11:47 Alex
  * Package: net.sf.memoranda
  * 
@@ -14,8 +14,8 @@ import main.java.memoranda.date.CalendarDate;
  * 
  */
 
-/*$Id: Project.java,v 1.5 2004/11/22 10:02:37 alexeya Exp $*/
-public interface Project {
+/*$Id: IProject.java,v 1.5 2004/11/22 10:02:37 alexeya Exp $*/
+public interface IProject {
     
     public static final int SCHEDULED = 0;
    
@@ -45,11 +45,11 @@ public interface Project {
             
     //int getProgress();
     
-    //TaskList getTaskList();
+    //ITaskList getTaskList();
     
-    //NoteList getNoteList();
+    //INoteList getNoteList();
     
-    //ResourcesList getResourcesList();
+    //IResourcesList getResourcesList();
     
     void freeze();
     void unfreeze();  

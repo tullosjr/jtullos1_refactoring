@@ -1,7 +1,7 @@
 /**
  * TaskTable.java         
  * -----------------------------------------------------------------------------
- * Project           Memoranda
+ * IProject           Memoranda
  * Package           net.sf.memoranda.ui
  * Original author   Alex V. Alishevskikh
  *                   [alexeya@gmail.com]
@@ -99,9 +99,9 @@ public class TaskTable extends JTable {
                 tableChanged();
             }
         });
-        CurrentProject.addProjectListener(new ProjectListener() {
-            public void projectChange(Project p, NoteList nl, TaskList tl,
-                                      ResourcesList rl) {
+        CurrentProject.addProjectListener(new IProjectListener() {
+            public void projectChange(IProject p, INoteList nl, ITaskList tl,
+                                      IResourcesList rl) {
             }
 
             public void projectWasChanged() {

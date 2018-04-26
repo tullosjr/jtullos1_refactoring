@@ -22,12 +22,8 @@ import javax.swing.event.CaretEvent;
 import javax.swing.text.Document;
 
 import main.java.memoranda.CurrentProject;
-import main.java.memoranda.interfaces.Note;
-import main.java.memoranda.interfaces.NoteList;
-import main.java.memoranda.interfaces.Project;
-import main.java.memoranda.interfaces.ProjectListener;
-import main.java.memoranda.interfaces.ResourcesList;
-import main.java.memoranda.interfaces.TaskList;
+import main.java.memoranda.interfaces.*;
+import main.java.memoranda.interfaces.INote;
 import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
 
@@ -113,8 +109,8 @@ public class SearchPanel extends JPanel {
         jPanel4.add(wholeWCB, BorderLayout.NORTH);
         jPanel4.add(regexpCB, BorderLayout.CENTER);
         jPanel3.add(searchB, BorderLayout.SOUTH);
-        CurrentProject.addProjectListener(new ProjectListener() {
-            public void projectChange(Project p, NoteList nl, TaskList tl, ResourcesList rl) {
+        CurrentProject.addProjectListener(new IProjectListener() {
+            public void projectChange(IProject p, INoteList nl, ITaskList tl, IResourcesList rl) {
                 notesList.update(new Vector());
             }
             public void projectWasChanged() {}
@@ -164,13 +160,13 @@ public class SearchPanel extends JPanel {
         this.add(progressBar, BorderLayout.SOUTH);*/
         for (int i = 0; i < notes.size(); i++) {
             //progressBar.setValue(i);
-            Note note = (Note) notes.get(i);
-            Document doc = CurrentStorage.get().openNote(note);
+            INote INote = (INote) notes.get(i);
+            Document doc = CurrentStorage.get().openNote(INote);
             try {
                 String txt = doc.getText(0, doc.getLength());
                 Matcher matcher = pattern.matcher(txt);
                 if (matcher.find())
-                    found.add(note);
+                    found.add(INote);
             }
             catch (Exception ex) {
                 ex.printStackTrace();

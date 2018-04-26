@@ -1674,7 +1674,7 @@ public class AltHTMLWriter extends AbstractWriter {
         /**
          * Remove the indices in the interval index0,index1 (inclusive) from
          * the selection model.  This is typically called to sync the selection
-         * model width a corresponding change in the data model.  Note
+         * model width a corresponding change in the data model.  INote
          * that (as always) index0 can be greater than index1.
          */
         public void removeIndexInterval(int index0, int index1) {

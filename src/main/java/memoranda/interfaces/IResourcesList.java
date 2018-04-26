@@ -1,5 +1,5 @@
 /**
- * ResourcesList.java
+ * IResourcesList.java
  * Created on 24.03.2003, 18:25:59 Alex
  * Package: net.sf.memoranda
  * 
@@ -15,8 +15,8 @@ import nu.xom.Document;
 /**
  * 
  */
-/*$Id: ResourcesList.java,v 1.4 2007/03/20 06:21:46 alexeya Exp $*/
-public interface ResourcesList {
+/*$Id: IResourcesList.java,v 1.4 2007/03/20 06:21:46 alexeya Exp $*/
+public interface IResourcesList {
     
     Vector getAllResources();
     

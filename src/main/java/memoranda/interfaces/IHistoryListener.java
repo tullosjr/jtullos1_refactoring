@@ -1,5 +1,5 @@
 /**
- * HistoryListener.java
+ * IHistoryListener.java
  * Created on 23.02.2003, 1:56:52 Alex
  * Package: net.sf.memoranda
  * 
@@ -13,8 +13,8 @@ import main.java.memoranda.HistoryItem;
 /**
  * 
  */
-/*$Id: HistoryListener.java,v 1.2 2004/01/30 12:17:41 alexeya Exp $*/
-public interface HistoryListener {
+/*$Id: IHistoryListener.java,v 1.2 2004/01/30 12:17:41 alexeya Exp $*/
+public interface IHistoryListener {
 
     /*void historyWasRolledBack();
     

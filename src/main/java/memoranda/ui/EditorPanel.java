@@ -27,7 +27,7 @@ import javax.swing.text.html.HTMLDocument;
 
 import main.java.memoranda.CurrentNote;
 import main.java.memoranda.History;
-import main.java.memoranda.interfaces.Note;
+import main.java.memoranda.interfaces.INote;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.ui.htmleditor.HTMLEditor;
 import main.java.memoranda.util.Configuration;
@@ -494,14 +494,14 @@ public class EditorPanel extends JPanel {
 
 	String initialTitle = "";
 
-	public void setDocument(Note note) {
-		// Note note = CurrentProject.getNoteList().getActiveNote();
+	public void setDocument(INote INote) {
+		// INote INote = CurrentProject.getNoteList().getActiveNote();
 		// try {
-		// this.editor.editor.setPage(CurrentStorage.get().getNoteURL(note));
-		editor.document = (HTMLDocument) CurrentStorage.get().openNote(note);
+		// this.editor.editor.setPage(CurrentStorage.get().getNoteURL(INote));
+		editor.document = (HTMLDocument) CurrentStorage.get().openNote(INote);
 		editor.initEditor();
-		if (note != null)
-			titleField.setText(note.getTitle());
+		if (INote != null)
+			titleField.setText(INote.getTitle());
 		else
 			titleField.setText("");
 		initialTitle = titleField.getText();
@@ -509,11 +509,11 @@ public class EditorPanel extends JPanel {
 		 * } catch (Exception ex) { new ExceptionDialog(ex); }
 		 */
 		/*
-		 * Document doc = CurrentStorage.get().openNote(note); try {
+		 * Document doc = CurrentStorage.get().openNote(INote); try {
 		 * this.editor.editor.setText(doc.getText(0, doc.getLength())); } catch
 		 * (Exception ex){ ex.printStackTrace(); }
 		 */
-		// .setDocument(CurrentStorage.get().openNote(note));
+		// .setDocument(CurrentStorage.get().openNote(INote));
 	}
 
 	public javax.swing.text.Document getDocument() {

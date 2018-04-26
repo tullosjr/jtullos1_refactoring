@@ -30,7 +30,7 @@ import main.java.memoranda.History;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
-import main.java.memoranda.interfaces.Event;
+import main.java.memoranda.interfaces.IEvent;
 import main.java.memoranda.util.Configuration;
 import main.java.memoranda.util.CurrentStorage;
 import main.java.memoranda.util.Local;
@@ -225,9 +225,9 @@ public class EventsPanel extends JPanel {
     }
 
     void editEventB_actionPerformed(ActionEvent e) {
-        EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("Event"));
-        Event ev =
-            (Event) eventsTable.getModel().getValueAt(
+        EventDialog dlg = new EventDialog(App.getFrame(), Local.getString("IEvent"));
+        IEvent ev =
+            (IEvent) eventsTable.getModel().getValueAt(
                 eventsTable.getSelectedRow(),
                 EventsTable.EVENT);
         
@@ -394,13 +394,13 @@ public class EventsPanel extends JPanel {
 
     void removeEventB_actionPerformed(ActionEvent e) {
 		String msg;
-		Event ev;
+		IEvent ev;
 
 		if(eventsTable.getSelectedRows().length > 1) 
 			msg = Local.getString("Remove") + " " + eventsTable.getSelectedRows().length 
 				+ " " + Local.getString("events") + "\n" + Local.getString("Are you sure?");
 		else {
-			ev = (Event) eventsTable.getModel().getValueAt(
+			ev = (IEvent) eventsTable.getModel().getValueAt(
                 eventsTable.getSelectedRow(),
                 EventsTable.EVENT);
 			msg = Local.getString("Remove event") + "\n'" 
@@ -416,7 +416,7 @@ public class EventsPanel extends JPanel {
         if (n != JOptionPane.YES_OPTION) return;
 
         for(int i=0; i< eventsTable.getSelectedRows().length;i++) {
-			ev = (Event) eventsTable.getModel().getValueAt(
+			ev = (IEvent) eventsTable.getModel().getValueAt(
                   eventsTable.getSelectedRows()[i], EventsTable.EVENT);
         EventsManager.removeEvent(ev);
 		}

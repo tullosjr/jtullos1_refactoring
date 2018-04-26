@@ -34,12 +34,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import main.java.memoranda.CurrentProject;
-import main.java.memoranda.interfaces.NoteList;
-import main.java.memoranda.interfaces.Project;
-import main.java.memoranda.interfaces.ProjectListener;
+import main.java.memoranda.interfaces.*;
+import main.java.memoranda.interfaces.INoteList;
 import main.java.memoranda.ProjectManager;
-import main.java.memoranda.interfaces.ResourcesList;
-import main.java.memoranda.interfaces.TaskList;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.date.CurrentDate;
 import main.java.memoranda.date.DateListener;
@@ -152,7 +149,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 		ppNewProject.setAction(newProjectAction);
 
 		ppProperties.setFont(new java.awt.Font("Dialog", 1, 11));
-		ppProperties.setText(Local.getString("Project properties"));
+		ppProperties.setText(Local.getString("IProject properties"));
 		ppProperties.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ppProperties_actionPerformed(e);
@@ -235,12 +232,12 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 		projectsPPMenu.add(ppProperties);
 		projectsPPMenu.addSeparator();
 		projectsPPMenu.add(ppShowActiveOnlyChB);
-		CurrentProject.addProjectListener(new ProjectListener() {
+		CurrentProject.addProjectListener(new IProjectListener() {
 			public void projectChange(
-				Project p,
-				NoteList nl,
-				TaskList tl,
-				ResourcesList rl) {
+				IProject p,
+				INoteList nl,
+				ITaskList tl,
+				IResourcesList rl) {
 			}
 			public void projectWasChanged() {
 				curProjectTitle.setText(CurrentProject.get().getTitle());
@@ -348,7 +345,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 
 	void ppDeleteProject_actionPerformed(ActionEvent e) {
 		String msg;
-		Project prj;
+		IProject prj;
 		Vector toremove = new Vector();
 		if (prjTablePanel.projectsTable.getSelectedRows().length > 1)
 			msg =
@@ -382,7 +379,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 			i < prjTablePanel.projectsTable.getSelectedRows().length;
 			i++) {
 			prj =
-				(Project) prjTablePanel
+				(IProject) prjTablePanel
 					.projectsTable
 					.getModel()
 					.getValueAt(
@@ -400,9 +397,9 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 	}
 
 	void ppProperties_actionPerformed(ActionEvent e) {
-		Project prj = prjTablePanel.getSelectedProject();
+		IProject prj = prjTablePanel.getSelectedProject();
 		ProjectDialog dlg =
-			new ProjectDialog(null, Local.getString("Project properties"));
+			new ProjectDialog(null, Local.getString("IProject properties"));
 		Dimension dlgSize = dlg.getSize();
 		Dimension frmSize = App.getFrame().getSize();
 		Point loc = App.getFrame().getLocation();
@@ -421,7 +418,7 @@ public class ProjectsPanel extends JPanel implements ExpandablePanel {
 			dlg.endDate.getModel().setValue(
 				prj.getEndDate().getCalendar().getTime());
 		}
-		/*if (prj.getStatus() == Project.FROZEN)
+		/*if (prj.getStatus() == IProject.FROZEN)
 			dlg.freezeChB.setSelected(true);*/
 		dlg.setVisible(true);
 		if (dlg.CANCELLED)

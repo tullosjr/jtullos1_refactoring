@@ -100,7 +100,7 @@ public class EventDialog extends JDialog implements WindowListener {
         headerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         header.setFont(new java.awt.Font("Dialog", 0, 20));
         header.setForeground(new Color(0, 0, 124));
-        header.setText(Local.getString("Event"));
+        header.setText(Local.getString("IEvent"));
         header.setIcon(new ImageIcon(main.java.memoranda.ui.EventDialog.class.getResource(
             "/ui/icons/event48.png")));
         headerPanel.add(header);

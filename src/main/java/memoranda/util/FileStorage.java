@@ -19,21 +19,14 @@ import java.net.URL;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 
-import main.java.memoranda.EventsManager;
-import main.java.memoranda.interfaces.Note;
-import main.java.memoranda.interfaces.NoteList;
-import main.java.memoranda.NoteListImpl;
-import main.java.memoranda.interfaces.Project;
-import main.java.memoranda.ProjectManager;
-import main.java.memoranda.interfaces.ResourcesList;
-import main.java.memoranda.ResourcesListImpl;
-import main.java.memoranda.interfaces.TaskList;
-import main.java.memoranda.TaskListImpl;
+import main.java.memoranda.*;
+import main.java.memoranda.interfaces.*;
+import main.java.memoranda.interfaces.INote;
+import main.java.memoranda.INoteListImpl;
 import main.java.memoranda.date.CalendarDate;
 import main.java.memoranda.ui.ExceptionDialog;
 import main.java.memoranda.ui.htmleditor.AltHTMLWriter;
 import nu.xom.Builder;
-import nu.xom.DocType;
 import nu.xom.Document;
 
 
@@ -49,7 +42,7 @@ public class FileStorage implements Storage {
     public FileStorage() {
         /*The 'MEMORANDA_HOME' key is an undocumented feature for 
           hacking the default location (Util.getEnvDir()) of the memoranda 
-          storage dir. Note that memoranda.config file is always placed at fixed 
+          storage dir. INote that memoranda.config file is always placed at fixed
           location (Util.getEnvDir()) anyway */
         String mHome = (String) Configuration.get("MEMORANDA_HOME");
         if (mHome.length() > 0) {
@@ -106,18 +99,18 @@ public class FileStorage implements Storage {
     }
 
     /**
-     * @see main.java.memoranda.util.Storage#storeNote(Note)
+     * @see main.java.memoranda.util.Storage#storeNote(INote)
      */
-    public void storeNote(Note note, javax.swing.text.Document doc) {
+    public void storeNote(INote INote, javax.swing.text.Document doc) {
         String filename =
-            JN_DOCPATH + note.getProject().getID() + File.separator;
+            JN_DOCPATH + INote.getProject().getID() + File.separator;
         doc.putProperty(
             javax.swing.text.Document.TitleProperty,
-            note.getTitle());        
-        CalendarDate d = note.getDate();
+            INote.getTitle());
+        CalendarDate d = INote.getDate();
 
-        filename += note.getId();//d.getDay() + "-" + d.getMonth() + "-" + d.getYear();
-        /*DEBUG*/System.out.println("[DEBUG] Save note: "+ filename);
+        filename += INote.getId();//d.getDay() + "-" + d.getMonth() + "-" + d.getYear();
+        /*DEBUG*/System.out.println("[DEBUG] Save INote: "+ filename);
 
         try {
             OutputStreamWriter fw =
@@ -135,9 +128,9 @@ public class FileStorage implements Storage {
                 "Failed to write a document to " + filename,
                 "");
         }
-        /*String filename = JN_DOCPATH + note.getProject().getID() + "/";
-        doc.putProperty(javax.swing.text.Document.TitleProperty, note.getTitle());
-        CalendarDate d = note.getDate();
+        /*String filename = JN_DOCPATH + INote.getProject().getID() + "/";
+        doc.putProperty(javax.swing.text.Document.TitleProperty, INote.getTitle());
+        CalendarDate d = INote.getDate();
         filename += d.getDay() + "-" + d.getMonth() + "-" + d.getYear();
         try {
             long t1 = new java.util.Date().getTime();
@@ -158,25 +151,25 @@ public class FileStorage implements Storage {
 
     }
     /**
-     * @see main.java.memoranda.util.Storage#openNote(Note)
+     * @see main.java.memoranda.util.Storage#openNote(INote)
      */
-    public javax.swing.text.Document openNote(Note note) {
+    public javax.swing.text.Document openNote(INote INote) {
 
         HTMLDocument doc = (HTMLDocument) editorKit.createDefaultDocument();
-        if (note == null)
+        if (INote == null)
             return doc;
         /*
-                String filename = JN_DOCPATH + note.getProject().getID() + File.separator;
-                CalendarDate d = note.getDate();
+                String filename = JN_DOCPATH + INote.getProject().getID() + File.separator;
+                CalendarDate d = INote.getDate();
                 filename += d.getDay() + "-" + d.getMonth() + "-" + d.getYear();
         */
-        String filename = getNotePath(note);
+        String filename = getNotePath(INote);
         try {
             /*DEBUG*/
 
-//            Util.debug("Open note: " + filename);
-//        	Util.debug("Note Title: " + note.getTitle());
-        	doc.setBase(new URL(getNoteURL(note)));
+//            Util.debug("Open INote: " + filename);
+//        	Util.debug("INote Title: " + INote.getTitle());
+        	doc.setBase(new URL(getNoteURL(INote)));
         	editorKit.read(
                 new InputStreamReader(new FileInputStream(filename), "UTF-8"),
                 doc,
@@ -189,9 +182,9 @@ public class FileStorage implements Storage {
         
         return doc;
         /*HTMLDocument doc = (HTMLDocument)editorKit.createDefaultDocument();
-        if (note == null) return doc;
-        String filename = JN_DOCPATH + note.getProject().getID() + "/";
-        CalendarDate d = note.getDate();
+        if (INote == null) return doc;
+        String filename = JN_DOCPATH + INote.getProject().getID() + "/";
+        CalendarDate d = INote.getDate();
         filename += d.getDay() + "-" + d.getMonth() + "-" + d.getYear();
         try {
             long t1 = new java.util.Date().getTime();
@@ -209,22 +202,22 @@ public class FileStorage implements Storage {
         return doc;*/
     }
 
-    public String getNoteURL(Note note) {        
-        return "file:" + JN_DOCPATH + note.getProject().getID() + "/" + note.getId();
+    public String getNoteURL(INote INote) {
+        return "file:" + JN_DOCPATH + INote.getProject().getID() + "/" + INote.getId();
     }
 
-   public String getNotePath(Note note) {
-        String filename = JN_DOCPATH + note.getProject().getID() + File.separator;
-//        CalendarDate d = note.getDate();
-        filename += note.getId();//d.getDay() + "-" + d.getMonth() + "-" + d.getYear();
+   public String getNotePath(INote INote) {
+        String filename = JN_DOCPATH + INote.getProject().getID() + File.separator;
+//        CalendarDate d = INote.getDate();
+        filename += INote.getId();//d.getDay() + "-" + d.getMonth() + "-" + d.getYear();
 	return filename;
    }
 
 
-    public void removeNote(Note note) {
-        File f = new File(getNotePath(note));
+    public void removeNote(INote INote) {
+        File f = new File(getNotePath(INote));
         /*DEBUG*/
-        System.out.println("[DEBUG] Remove note:" + getNotePath(note));
+        System.out.println("[DEBUG] Remove INote:" + getNotePath(INote));
         f.delete();
     }
 
@@ -251,9 +244,9 @@ public class FileStorage implements Storage {
         saveDocument(ProjectManager._doc, JN_DOCPATH + ".projects");
     }
     /**
-     * @see main.java.memoranda.util.Storage#removeProject(Project)
+     * @see main.java.memoranda.util.Storage#removeProject(IProject)
      */
-    public void removeProjectStorage(Project prj) {
+    public void removeProjectStorage(IProject prj) {
         String id = prj.getID();
         File f = new File(JN_DOCPATH + id);
         File[] files = f.listFiles();
@@ -262,7 +255,7 @@ public class FileStorage implements Storage {
         f.delete();
     }
 
-    public TaskList openTaskList(Project prj) {
+    public ITaskList openTaskList(IProject prj) {
         String fn = JN_DOCPATH + prj.getID() + File.separator + ".tasklist";
 
         if (documentExists(fn)) {
@@ -294,7 +287,7 @@ public class FileStorage implements Storage {
         }
     }
 
-    public void storeTaskList(TaskList tasklist, Project prj) {
+    public void storeTaskList(ITaskList tasklist, IProject prj) {
         /*DEBUG*/
         System.out.println(
             "[DEBUG] Save task list: "
@@ -307,9 +300,9 @@ public class FileStorage implements Storage {
         saveDocument(tasklistDoc,JN_DOCPATH + prj.getID() + File.separator + ".tasklist");
     }
     /**
-     * @see main.java.memoranda.util.Storage#createProjectStorage(Project)
+     * @see main.java.memoranda.util.Storage#createProjectStorage(IProject)
      */
-    public void createProjectStorage(Project prj) {
+    public void createProjectStorage(IProject prj) {
         /*DEBUG*/
         System.out.println(
             "[DEBUG] Create project dir: " + JN_DOCPATH + prj.getID());
@@ -317,34 +310,34 @@ public class FileStorage implements Storage {
         dir.mkdirs();
     }
     /**
-     * @see main.java.memoranda.util.Storage#openNoteList(Project)
+     * @see main.java.memoranda.util.Storage#openNoteList(IProject)
      */
-    public NoteList openNoteList(Project prj) {
+    public INoteList openNoteList(IProject prj) {
         String fn = JN_DOCPATH + prj.getID() + File.separator + ".notes";
       //System.out.println(fn);
         if (documentExists(fn)) {
             /*DEBUG*/
             System.out.println(
-                "[DEBUG] Open note list: "
+                "[DEBUG] Open INote list: "
                     + JN_DOCPATH
                     + prj.getID()
                     + File.separator
                     + ".notes");
-            return new NoteListImpl(openDocument(fn), prj);
+            return new INoteListImpl(openDocument(fn), prj);
         }
         else {
             /*DEBUG*/
-            System.out.println("[DEBUG] New note list created");
-            return new NoteListImpl(prj);
+            System.out.println("[DEBUG] New INote list created");
+            return new INoteListImpl(prj);
         }
     }
     /**
-     * @see main.java.memoranda.util.Storage#storeNoteList(NoteList, Project)
+     * @see main.java.memoranda.util.Storage#storeNoteList(INoteList, IProject)
      */
-    public void storeNoteList(NoteList nl, Project prj) {
+    public void storeNoteList(INoteList nl, IProject prj) {
         /*DEBUG*/
         System.out.println(
-            "[DEBUG] Save note list: "
+            "[DEBUG] Save INote list: "
                 + JN_DOCPATH
                 + prj.getID()
                 + File.separator
@@ -409,9 +402,9 @@ public class FileStorage implements Storage {
         saveDocument(MimeTypesList._doc, JN_DOCPATH + ".mimetypes");
     }
     /**
-     * @see main.java.memoranda.util.Storage#openResourcesList(Project)
+     * @see main.java.memoranda.util.Storage#openResourcesList(IProject)
      */
-    public ResourcesList openResourcesList(Project prj) {
+    public IResourcesList openResourcesList(IProject prj) {
         String fn = JN_DOCPATH + prj.getID() + File.separator + ".resources";
         if (documentExists(fn)) {
             /*DEBUG*/
@@ -420,14 +413,14 @@ public class FileStorage implements Storage {
         }
         else {
             /*DEBUG*/
-            System.out.println("[DEBUG] New note list created");
+            System.out.println("[DEBUG] New INote list created");
             return new ResourcesListImpl(prj);
         }
     }
     /**
-     * @see main.java.memoranda.util.Storage#storeResourcesList(ResourcesList, Project)
+     * @see main.java.memoranda.util.Storage#storeResourcesList(IResourcesList, IProject)
      */
-    public void storeResourcesList(ResourcesList rl, Project prj) {
+    public void storeResourcesList(IResourcesList rl, IProject prj) {
         /*DEBUG*/
         System.out.println(
             "[DEBUG] Save resources list: "

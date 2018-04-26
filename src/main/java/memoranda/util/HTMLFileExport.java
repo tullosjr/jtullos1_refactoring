@@ -14,13 +14,13 @@ import java.util.regex.Pattern;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLDocument;
 
+import main.java.memoranda.interfaces.INote;
 import org.apache.xml.serialize.Method;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
 import org.cyberneko.html.parsers.SAXParser;
 import org.xml.sax.InputSource;
 
-import main.java.memoranda.interfaces.Note;
 import main.java.memoranda.ui.ExceptionDialog;
 import main.java.memoranda.ui.htmleditor.AltHTMLWriter;
 /**
@@ -32,17 +32,17 @@ public class HTMLFileExport {
     String charset = "";
     File f = null;
     HTMLDocument doc;
-    Note note = null;
+    INote INote = null;
     boolean xhtml = false;
     boolean num = false;
     String templFile = null;
     /**
      * Constructor for HTMLFileExport.
      */
-    public HTMLFileExport(File f, Document doc, Note note, String charset, boolean num, String templFile, boolean xhtml) {
+    public HTMLFileExport(File f, Document doc, INote INote, String charset, boolean num, String templFile, boolean xhtml) {
         this.f = f;
         this.doc = (HTMLDocument)doc;
-        this.note = note;
+        this.INote = INote;
         this.charset = charset;
         this.num = num;
         this.templFile = templFile;
@@ -111,10 +111,10 @@ public class HTMLFileExport {
      
 	 private String applyTemplate() {
         String body = getNoteBody();        
-		String title = note != null? note.getTitle() : "";
-		String id = note != null? note.getId() : "";
-		String project = note != null? note.getProject().getTitle() : "";
-		String date = note != null? note.getDate().getFullDateString() : "";
+		String title = INote != null? INote.getTitle() : "";
+		String id = INote != null? INote.getId() : "";
+		String project = INote != null? INote.getProject().getTitle() : "";
+		String date = INote != null? INote.getDate().getFullDateString() : "";
 		String now = new Date().toString();
 		String templ = getTemplateString(templFile);
 		templ = templ.replaceAll("@CONTENT@", body);

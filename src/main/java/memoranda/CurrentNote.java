@@ -1,23 +1,23 @@
 package main.java.memoranda;
 
-import main.java.memoranda.interfaces.Note;
-import main.java.memoranda.interfaces.NoteListener;
+import main.java.memoranda.interfaces.INote;
+import main.java.memoranda.interfaces.INoteListener;
 
 import java.util.Collection;
 import java.util.Vector;
 
 public class CurrentNote {
 
-	private static Note currentNote = null;
+	private static INote currentINote = null;
     private static Vector noteListeners = new Vector();
 
-    public static Note get() {
-        return currentNote;
+    public static INote get() {
+        return currentINote;
     }
 
-    public static void set(Note note, boolean toSaveCurrentNote) {
-        noteChanged(note, toSaveCurrentNote);
-        currentNote = note;
+    public static void set(INote INote, boolean toSaveCurrentNote) {
+        noteChanged(INote, toSaveCurrentNote);
+        currentINote = INote;
     }
 
     public static void reset() {
@@ -25,7 +25,7 @@ public class CurrentNote {
         set(null, true);
     }
 
-    public static void addNoteListener(NoteListener nl) {
+    public static void addNoteListener(INoteListener nl) {
         noteListeners.add(nl);
     }
 
@@ -33,9 +33,9 @@ public class CurrentNote {
         return noteListeners;
     }
 
-    private static void noteChanged(Note note, boolean toSaveCurrentNote) {
+    private static void noteChanged(INote INote, boolean toSaveCurrentNote) {
         for (int i = 0; i < noteListeners.size(); i++) {
-            ((NoteListener)noteListeners.get(i)).noteChange(note,toSaveCurrentNote);
+            ((INoteListener)noteListeners.get(i)).noteChange(INote,toSaveCurrentNote);
 		}
     }
 }

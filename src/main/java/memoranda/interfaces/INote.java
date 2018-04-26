@@ -1,5 +1,5 @@
 /**
- * Note.java
+ * INote.java
  * Created on 11.02.2003, 17:05:27 Alex
  * Package: net.sf.memoranda
  * 
@@ -12,8 +12,8 @@ import main.java.memoranda.date.CalendarDate;
 /**
  * 
  */
-/*$Id: Note.java,v 1.4 2004/09/30 17:19:52 ivanrise Exp $*/
-public interface Note {
+/*$Id: INote.java,v 1.4 2004/09/30 17:19:52 ivanrise Exp $*/
+public interface INote {
     
     CalendarDate getDate();
     
@@ -26,5 +26,5 @@ public interface Note {
     boolean isMarked();
     void setMark(boolean mark);
         
-    Project getProject();
+    IProject getProject();
 }

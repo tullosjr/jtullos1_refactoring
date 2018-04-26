@@ -9,8 +9,8 @@
 package main.java.memoranda;
 
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.interfaces.Note;
-import main.java.memoranda.interfaces.Project;
+import main.java.memoranda.interfaces.INote;
+import main.java.memoranda.interfaces.IProject;
 import nu.xom.Attribute;
 import nu.xom.Element;
 
@@ -18,21 +18,21 @@ import nu.xom.Element;
  * 
  */
 /*$Id: NoteImpl.java,v 1.6 2004/10/06 19:15:44 ivanrise Exp $*/
-public class NoteImpl implements Note, Comparable {
+public class NoteImpl implements INote, Comparable {
     
     private Element _el = null; 
-    private Project _project;
+    private IProject _project;
     
     /**
      * Constructor for NoteImpl.
      */
-    public NoteImpl(Element el, Project project) {
+    public NoteImpl(Element el, IProject project) {
         _el = el;
         _project = project;
     }
 
     /**
-     * @see Note#getDate()
+     * @see INote#getDate()
      */
     public CalendarDate getDate() {
 		Element day = (Element)_el.getParent();
@@ -47,11 +47,11 @@ public class NoteImpl implements Note, Comparable {
 
     }
     
-    public Project getProject() {
+    public IProject getProject() {
         return _project;
     }
     /**
-     * @see Note#getTitle()
+     * @see INote#getTitle()
      */
     public String getTitle() {
         Attribute ta = _el.getAttribute("title");
@@ -59,7 +59,7 @@ public class NoteImpl implements Note, Comparable {
         return _el.getAttribute("title").getValue();
     }
     /**
-     * @see Note#setTitle(java.lang.String)
+     * @see INote#setTitle(java.lang.String)
      */
     public void setTitle(String s) {
         Attribute ta = _el.getAttribute("title");
@@ -69,7 +69,7 @@ public class NoteImpl implements Note, Comparable {
     }
 	
 	/**
-     * @see Note#getId
+     * @see INote#getId
      */
 	
 	public String getId() {
@@ -79,7 +79,7 @@ public class NoteImpl implements Note, Comparable {
 	}
 	
 	/**
-     * @see Note#setId(java.lang.String)
+     * @see INote#setId(java.lang.String)
      */
 	 
 	public void setId(String s) {
@@ -87,13 +87,13 @@ public class NoteImpl implements Note, Comparable {
 		if(id==null) _el.addAttribute(new Attribute("refid", s));
 	}
     /**
-     * @see Note#isMarked()
+     * @see INote#isMarked()
      */
     public boolean isMarked() {
         return _el.getAttribute("bookmark") != null;        
     }
     /**
-     * @see Note#setMark(boolean)
+     * @see INote#setMark(boolean)
      */
     public void setMark(boolean mark) {
         Attribute ma = _el.getAttribute("bookmark");        
@@ -110,10 +110,10 @@ public class NoteImpl implements Note, Comparable {
 	 * Comparable interface
 	 */
 	public int compareTo(Object o) {
-		Note note = (Note) o;
-		if(getDate().getDate().getTime() > note.getDate().getDate().getTime())
+		INote INote = (INote) o;
+		if(getDate().getDate().getTime() > INote.getDate().getDate().getTime())
 			return 1;
-		else if(getDate().getDate().getTime() < note.getDate().getDate().getTime())
+		else if(getDate().getDate().getTime() < INote.getDate().getDate().getTime())
 			return -1;
 		else 
 			return 0;

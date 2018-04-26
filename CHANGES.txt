@@ -40,16 +40,16 @@ Done since Memoranda 1.0b3-20040322
 
 - CHECK_IF_ALREADY_STARTED configuration option added, FAQ updated 
   (submitted by Michael Radtke <mradtke@abigale.de>)[alexeya]
-- New feature: Preview a note with web-browser [alexeya]
+- New feature: Preview a INote with web-browser [alexeya]
 - Icons updated [alexeya]
 - Configurable port number (PORT_NUMBER property added)
   (see also FAQ.txt) [alexeya]
 - Fixed: Incompatibility with old notes format. [alexeya]
-- "File->New note" menu item added [alexeya]
+- "File->New INote" menu item added [alexeya]
 - Fixed: fixed compile warnings on java 1.5
 - Feature: delete notes using the DELETE key [ivanrise]
 - Fixed: [ 1046374 ] not active selected notes [ivanrise]
-- Fixed: Current note is not changed when another project is selected [alexeya]
+- Fixed: Current INote is not changed when another project is selected [alexeya]
 - TaskPanel: "Complete task" icon added, "Show active only" implemented
   as checkbox in context menu (for consistency with projects menu) [alexeya] 
 - Nicer color for day with notes in calendar [alexeya]
@@ -127,7 +127,7 @@ Done since Memoranda 1.0a-20031102 release:
 - Fixed : Bug 846487 : html-editor : Alternative Font Dialog [pbielen]
 - Fixed : Bug 819143 : Task (sorting on priority) needs to be fixed [jcscoobyrs]
 - Fixed : Bug 843516 : Mouse-event problems on tasks-table [jcscoobyrs]
-- Fixed : Bug 827348 : Delete note from pane [ivanrise]
+- Fixed : Bug 827348 : Delete INote from pane [ivanrise]
 - Fixed : Bug 830064 : html-editor: object properties [pbielen]
 - Fixed : Bug 842351 : html-editor : Insert Table Dialog [pbielen]
 - Fixed : Unpacked projects where not being displayed when projectsPanel was expanded. [ivanrise]
@@ -136,7 +136,7 @@ Done since Memoranda 1.0a-20031102 release:
 - Fixed : Bug 819144 : Export of notes (html) [jcscoobyrs]
 - Fixed : Bug with alarmB and taskB on dailyItemsPanel
   + System menus where not being disabled when using these buttons. [ivanrise]
-- Fixed : Bug 842461 - Clear note [ivanrise]
+- Fixed : Bug 842461 - Clear INote [ivanrise]
 - Fixed : Bug 842343 - html-editor : search and replace-dialog [pbielen]
 - Fixed : Bug 819131 - New Event Dialog (DateSpinners) [jcscoobyrs]
 - Fixed : Bug 838861 - html-editor : Image Dialog closing [pbielen]
@@ -211,7 +211,7 @@ Done since Memoranda 1.0a-20030930 release:
 - FIXED: Missing icon src/net/sf/memoranda/ui/resources/icons/calendar.png added.
 - Splash screen and SHOW_SPLASH property added [alexeya]
 - Implemented restoring the frame size and location from previous session [alexeya]
-- FIXED: Bug when current note text is not saved on exit [alexeya]
+- FIXED: Bug when current INote text is not saved on exit [alexeya]
 - Selected panel is stored in context [alexeya]
 
 
